@@ -3,11 +3,16 @@ const mappers = require('./mappers');
 
 module.exports = {
   get,
+  getProjects,
   insert,
   update,
   remove,
   getProjectActions,
 };
+
+function getProjects() {
+  return db('projects');
+}
 
 function get(id) {
   let query = db('projects as p');
@@ -17,7 +22,7 @@ function get(id) {
 
     const promises = [query, this.getProjectActions(id)]; // [ projects, actions ]
 
-    return Promise.all(promises).then(function(results) {
+    return Promise.all(promises).then(function (results) {
       let [project, actions] = results;
 
       if (project) {
