@@ -6,10 +6,14 @@ const router = express.Router();
 router.use(express.json());
 
 // Get all Projects
-router.get('/', async (req, res) => {
+router.get('/:id', async (req, res) => {
   try {
-    const projects = await Projects.get(req.query);
-    res.status(200).json(projects);
+    const project = await Projects.get(req.params.id);
+    if (project) {
+      res.status(200).json(project);
+    } else {
+      res.status(404).json({ message: 'Project could not be found' })
+    }
   } catch (error) {
     res.status(500).json({
       message: 'Error retrieving the projects'
