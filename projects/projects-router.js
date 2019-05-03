@@ -21,18 +21,6 @@ router.get('/:id', async (req, res) => {
   }
 })
 
-// Get all a project's actions
-router.get(':id/actions', async (req, res) => {
-  try {
-    const projectActions = await Projects.getProjectActions(req.params.id);
-    res.status(200).json(projectActions)
-  } catch (error) {
-    res.status(500).json({
-      message: 'Error getting the action for the project'
-    })
-  }
-})
-
 // Delete a project
 router.delete('/:id', async (req, res) => {
   try {
