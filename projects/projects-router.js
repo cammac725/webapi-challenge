@@ -5,7 +5,7 @@ const router = express.Router();
 
 router.use(express.json());
 
-// Get all Projects
+// Get a project by id
 router.get('/:id', async (req, res) => {
   try {
     const project = await Projects.get(req.params.id);
@@ -33,6 +33,7 @@ router.get(':id/actions', async (req, res) => {
   }
 })
 
+// Delete a project
 router.delete('/:id', async (req, res) => {
   try {
     const count = await Projects.remove(req.params.id);
@@ -52,6 +53,7 @@ router.delete('/:id', async (req, res) => {
   }
 })
 
+// Add a new project
 router.post('/', async (req, res) => {
   try {
     const project = await Projects.insert(req.body);
@@ -63,6 +65,7 @@ router.post('/', async (req, res) => {
   }
 })
 
+// Update an existing project
 router.put('/:id', async (req, res) => {
   try {
     const project = await Projects.update(req.params.id, req.body);
